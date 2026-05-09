@@ -1,0 +1,722 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>男性健康自测表 | 美和生殖--男性医学中心</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #eef2f9 0%, #dee6f0 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 1.5rem 1rem 3rem;
+            color: #1a2c3e;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .brand {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .brand h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f4e6e, #2c7a4d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .brand-tag {
+            font-size: 0.9rem;
+            background: rgba(255,255,245,0.8);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin-top: 8px;
+            color: #1f6e43;
+            font-weight: 600;
+        }
+        .disclaimer-badge {
+            background: #ffe9e9;
+            border-left: 6px solid #c0392b;
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #a0322c;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            padding: 1.8rem 1.5rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        .question-item {
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #e2edf7;
+        }
+        .question-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+            color: #0f2b3b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .q-num {
+            background: #e3f0e8;
+            color: #1b6e42;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .options-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .radio-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f9fbfe;
+            border: 1px solid #cbdee9;
+            border-radius: 60px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #2c5778;
+        }
+        .radio-option:hover {
+            background: #eef3fc;
+            border-color: #8ab3d0;
+        }
+        input[type="radio"] {
+            margin: 0;
+            accent-color: #1f6e43;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0 1.2rem;
+        }
+        .btn {
+            border: none;
+            background: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .btn-primary {
+            background: #1f6e43;
+            color: white;
+            box-shadow: 0 6px 14px rgba(31,110,67,0.25);
+        }
+        .btn-primary:hover {
+            background: #0f5938;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #eef3fc;
+            color: #2c5a74;
+            border: 1px solid #c9daec;
+        }
+        .btn-secondary:hover {
+            background: #e2eaf3;
+        }
+        .score-area {
+            background: linear-gradient(115deg, #f1f8fe, #ffffff);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            text-align: center;
+            margin: 0.5rem 0 1rem;
+            border: 1px solid #cde0ef;
+        }
+        .score-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1f6e43;
+        }
+        .insight-card {
+            background: #ffffffea;
+            border-radius: 1.5rem;
+            padding: 1.3rem 1.4rem;
+            margin-top: 1rem;
+            border-left: 7px solid #1f6e43;
+        }
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        .section-head {
+            font-weight: 700;
+            color: #1f4e6e;
+            border-left: 3px solid #2c7a4d;
+            padding-left: 12px;
+            margin: 1rem 0 0.5rem;
+        }
+        .text-muted {
+            color: #2c4d6e;
+            font-size: 0.88rem;
+            line-height: 1.48;
+        }
+        hr {
+            margin: 0.8rem 0;
+            border-color: #e0edf7;
+        }
+        .qr-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #ffffffcc;
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+        }
+        .qr-box {
+            background: white;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            text-align: center;
+            min-width: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+        }
+        .qr-info {
+            flex: 1;
+            font-size: 0.8rem;
+            color: #2a577b;
+        }
+        footer {
+            text-align: center;
+            margin-top: 1.8rem;
+            font-size: 0.85rem;
+            color: #2c5a74;
+            padding: 0.5rem;
+            border-top: 1px solid #d0e2ef;
+        }
+        .contact-phone {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f6e43;
+            text-align: center;
+            background: #eef3fc;
+            display: inline-block;
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-container {
+            background: white;
+            border-radius: 2rem;
+            max-width: 90%;
+            width: 850px;
+            max-height: 85vh;
+            overflow: auto;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-container h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f6e43;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px 6px;
+            text-align: center;
+        }
+        .data-table th {
+            background: #eef3fc;
+            font-weight: 600;
+        }
+        .close-modal, .export-btn {
+            background: #1f6e43;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        .clear-history {
+            background: #c72a2a;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 600px) {
+            .card { padding: 1.2rem; }
+            .radio-option { padding: 4px 12px; font-size: 0.75rem; }
+            .data-table { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="brand">
+        <h1>⚕️ 男性健康自测表</h1>
+        <div class="brand-tag">美和生殖--男性医学中心</div>
+    </div>
+    <div class="disclaimer-badge">
+        ⚠️ 健康测评不作为诊疗依据。
+    </div>
+
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <h3 style="font-weight: 600;">📋 6项核心自测</h3>
+            <span style="font-size: 0.7rem;">0=几乎没有 &nbsp; 4=几乎总是</span>
+        </div>
+        <form id="selfTestForm"></form>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" id="calcBtn">📊 计算总分 & 获取解读</button>
+            <button class="btn btn-secondary" id="resetBtn">🔄 重置所有选项</button>
+        </div>
+
+        <div id="scoreDisplay" class="score-area" style="display: none;">
+            <div>您的总分</div>
+            <div class="score-value" id="totalScore">0</div>
+            <div class="score-range" id="scoreRangeTag"></div>
+        </div>
+        <div id="insightContainer"></div>
+    </div>
+
+    <div class="qr-container">
+        <div class="qr-box" id="qrcodeBox"></div>
+        <div class="qr-info">
+            <strong>📱 分享与快速自测</strong><br>
+            扫描二维码打开本工具，可转发给朋友。<br>
+            <span style="font-size:0.7rem;">* 二维码会自动生成当前页面地址，部署到服务器后即可扫码访问。</span>
+        </div>
+    </div>
+
+    <footer>
+        科学自测 · 隐私无忧 · 如有不适，请及时就医
+    </footer>
+    <div class="contact-phone">
+        📞 详询 0319-3021530或微信咨询
+    </div>
+</div>
+
+<script>
+    // ---------- 题目数据 ----------
+    const questions = [
+        { text: "性欲（想做的欲望）", opts: ["完全没兴趣","很少有想法","偶尔有","正常","和以前差不多/很强"] },
+        { text: "勃起硬度（关键）", opts: ["完全无法勃起","能勃起但太软，无法进入","能勃起但硬度不足，勉强进入","硬度足够，但偶尔不持久","硬度足够、稳定，满意"] },
+        { text: "勃起维持时间", opts: ["刚勃起立刻软","进入后很快软","中途容易软","基本能维持到结束","完全没问题"] },
+        { text: "射精控制（早泄自测）", opts: ["进入前就射","进入后＜1分钟就射","1～3分钟射，控制差","3～10分钟，基本满意","能自由控制，时间满意"] },
+        { text: "性生活自信与焦虑", opts: ["非常自卑、焦虑、逃避","很担心表现","有点紧张","一般，不影响","自信、放松"] },
+        { text: "双方满意度（你自己的感受）", opts: ["非常不满意，痛苦","不满意","一般","比较满意","很满意"] }
+    ];
+
+    // 构建题目表单
+    function buildForm() {
+        const form = document.getElementById('selfTestForm');
+        if (!form) return;
+        form.innerHTML = '';
+        for (let i = 0; i < questions.length; i++) {
+            const q = questions[i];
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question-item';
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'question-text';
+            titleDiv.innerHTML = `<span class="q-num">${i+1}</span> ${q.text}`;
+            qDiv.appendChild(titleDiv);
+            
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options-group';
+            const groupName = `q_${i+1}`;
+            for (let val = 0; val <= 4; val++) {
+                const radioId = `${groupName}_${val}`;
+                const label = document.createElement('label');
+                label.className = 'radio-option';
+                label.htmlFor = radioId;
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = groupName;
+                radio.value = val;
+                radio.id = radioId;
+                const span = document.createElement('span');
+                span.innerText = `${val} - ${q.opts[val]}`;
+                label.appendChild(radio);
+                label.appendChild(span);
+                optionsDiv.appendChild(label);
+            }
+            qDiv.appendChild(optionsDiv);
+            form.appendChild(qDiv);
+        }
+    }
+
+    // 获取分数数组（未完整填写时返回 null）
+    function getScores() {
+        let scores = [];
+        for (let i = 1; i <= 6; i++) {
+            const selected = document.querySelector(`input[name="q_${i}"]:checked`);
+            if (!selected) return null;
+            scores.push(parseInt(selected.value));
+        }
+        return scores;
+    }
+
+    // 三档解读：结果解读（末尾自动加等级）、核心判断、建议（不带分步和总结）
+    const insights = {
+        low: {  // 0-6 重度异常
+            resultBase: "0～6分：性欲、勃起硬度、维持、射精控制、自信、满意度六项均偏弱，整体功能处于偏低水平。",
+            gradeSuffix: "属于重度异常",
+            core: "1. 整体功能全面偏弱，不单是某一项问题；\n2. 很少有正常状态，多半伴随焦虑与身体基础下降；\n3. 大概率是生活方式+心理+潜在器质性因素叠加。",
+            suggestion: "优先就医检查，完善性激素、血糖血脂、血压、甲功、阴茎供血和敏感度等检查，及早对症治疗，恢复空间大。切忌自行服药，避免加重病情。"
+        },
+        mid: {  // 7-14 轻度异常
+            resultBase: "7～14分：存在间歇性或轻中度问题（硬度不足、中途疲软或射精控制欠佳），影响生活质量。",
+            gradeSuffix: "属于轻度异常",
+            core: "1. 症状持续3个月内反复出现，超出单纯疲劳；\n2. 心理与生活习惯（熬夜、久坐、压力）为主要推手；\n3. 有较大恢复空间，多数人调整后可改善。",
+            suggestion: "优先找专业大夫做基础评估，明确是心理性、生活习惯还是轻微器质性问题，同时结合生活方式指导，必要时配合药物干预治疗，多数一个月内恢复。不自行乱吃壮阳药、偏方，避免加重。"
+        },
+        high: { // 15-24 正常
+            resultBase: "15～24分：性功能各项指标良好，偶尔不满意属生理波动。",
+            gradeSuffix: "属于正常范围",
+            core: "1. 生理基础良好，血管、神经、激素大概率正常；\n2. 多为心理敏感或偶发疲劳影响；\n3. 无需用药或手术。",
+            suggestion: "保持良好心态，均衡饮食，规律作息、适度运动，避免长期熬夜、久坐憋尿。规律性生活，不纵欲、不刻意禁欲，保持身心放松。"
+        }
+    };
+
+    function showInterpretation(total) {
+        let type;
+        let gradeText;
+        if (total <= 6) {
+            type = 'low';
+            gradeText = "重度异常";
+        } else if (total <= 14) {
+            type = 'mid';
+            gradeText = "轻度异常";
+        } else {
+            type = 'high';
+            gradeText = "正常";
+        }
+        const data = insights[type];
+        const rangeText = total <=6 ? "0～6分" : (total <=14 ? "7～14分" : "15～24分");
+        document.getElementById("scoreRangeTag").innerText = rangeText + " · " + gradeText;
+        document.getElementById("totalScore").innerText = total;
+        const container = document.getElementById("insightContainer");
+        // 结果解读：原文本 + 等级后缀
+        const resultText = data.resultBase + " " + data.gradeSuffix;
+        container.innerHTML = `
+            <div class="insight-card">
+                <div class="insight-title">📌 ${type === 'low' ? '🔴 重度异常' : (type === 'mid' ? '🟡 轻度异常' : '🟢 功能正常')}</div>
+                <div><strong>📖 结果解读</strong><br><span class="text-muted">${resultText}</span></div>
+                <div class="section-head">🎯 核心判断</div>
+                <div class="text-muted" style="white-space: pre-line;">${data.core}</div>
+                <div class="section-head">💡 建议</div>
+                <div class="text-muted">${data.suggestion}</div>
+                <hr><div class="text-muted" style="font-size:0.75rem;">※ 自测基于最近3个月，持续不适请及时就医。</div>
+            </div>
+        `;
+        document.getElementById("scoreDisplay").style.display = "block";
+    }
+
+    // ========== 历史记录存储 ==========
+    const STORAGE_KEY = "male_health_test_history";
+    
+    function saveTestRecord(scores, total) {
+        try {
+            let history = localStorage.getItem(STORAGE_KEY);
+            let records = history ? JSON.parse(history) : [];
+            const record = {
+                timestamp: new Date().toLocaleString(),
+                scores: [...scores],
+                total: total
+            };
+            records.unshift(record);
+            if (records.length > 200) records = records.slice(0, 200);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+        } catch(e) { console.warn("存储失败", e); }
+    }
+
+    function getHistory() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    }
+
+    function clearHistory() {
+        localStorage.removeItem(STORAGE_KEY);
+    }
+
+    function exportToCSV() {
+        const history = getHistory();
+        if (history.length === 0) {
+            alert("暂无历史数据可导出。");
+            return;
+        }
+        const headers = ["序号", "测试时间", "Q1性欲", "Q2勃起硬度", "Q3维持时间", "Q4射精控制", "Q5自信焦虑", "Q6满意度", "总分"];
+        const rows = [headers];
+        history.forEach((rec, idx) => {
+            rows.push([
+                (idx+1).toString(),
+                rec.timestamp,
+                rec.scores[0].toString(),
+                rec.scores[1].toString(),
+                rec.scores[2].toString(),
+                rec.scores[3].toString(),
+                rec.scores[4].toString(),
+                rec.scores[5].toString(),
+                rec.total.toString()
+            ]);
+        });
+        const csvContent = rows.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n");
+        const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.setAttribute("download", "男性健康自测数据.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        alert("导出成功！");
+    }
+
+    function showAdminData() {
+        const history = getHistory();
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'modal-overlay';
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'modal-container';
+        
+        let tableHtml = `<h3>📊 后台测试记录 (共 ${history.length} 条)</h3>`;
+        if (history.length === 0) {
+            tableHtml += `<p class="text-muted">暂无历史数据。每次计算总分后会自动保存记录。</p>`;
+        } else {
+            tableHtml += `<div style="overflow-x: auto;"><table class="data-table"><thead><tr><th>序号</th><th>时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th></tr></thead><tbody>`;
+            for (let i = 0; i < history.length; i++) {
+                const rec = history[i];
+                tableHtml += `<tr>
+                    <td>${i+1}</td>
+                    <td>${rec.timestamp}</td>
+                    ${rec.scores.map(s => `<td>${s}</td>`).join('')}
+                    <td><strong>${rec.total}</strong></td>
+                </tr>`;
+            }
+            tableHtml += `</tbody></table></div>`;
+        }
+        modalDiv.innerHTML = tableHtml;
+        
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'modal-actions';
+        const closeBtn = document.createElement('button');
+        closeBtn.innerText = '关闭';
+        closeBtn.className = 'close-modal';
+        closeBtn.onclick = () => document.body.removeChild(modalOverlay);
+        actionsDiv.appendChild(closeBtn);
+        
+        if (history.length > 0) {
+            const exportBtn = document.createElement('button');
+            exportBtn.innerText = '📎 导出为 CSV';
+            exportBtn.className = 'export-btn';
+            exportBtn.style.background = "#2c7a4d";
+            exportBtn.onclick = () => { exportToCSV(); };
+            actionsDiv.appendChild(exportBtn);
+            
+            const clearBtn = document.createElement('button');
+            clearBtn.innerText = '🗑️ 清空所有记录';
+            clearBtn.className = 'clear-history';
+            clearBtn.onclick = () => {
+                if (confirm('确认清空所有历史测试记录吗？')) {
+                    clearHistory();
+                    document.body.removeChild(modalOverlay);
+                    alert('历史记录已清空');
+                }
+            };
+            actionsDiv.appendChild(clearBtn);
+        }
+        modalDiv.appendChild(actionsDiv);
+        modalOverlay.appendChild(modalDiv);
+        document.body.appendChild(modalOverlay);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) document.body.removeChild(modalOverlay);
+        });
+    }
+
+    // ========== 重置按钮：连续点击3次触发管理员后台 ==========
+    let resetClickTimestamps = [];
+    const ADMIN_PASSWORD = "A123888";
+    
+    function normalReset() {
+        for (let i = 1; i <= 6; i++) {
+            document.querySelectorAll(`input[name="q_${i}"]`).forEach(r => r.checked = false);
+        }
+        document.getElementById("scoreDisplay").style.display = "none";
+        document.getElementById("insightContainer").innerHTML = `<div class="text-muted" style="padding:1rem; text-align:center;">✨ 完成自测后点击「计算总分与解读」获取详细建议 ✨</div>`;
+    }
+    
+    function onResetButtonClick() {
+        const now = Date.now();
+        resetClickTimestamps = resetClickTimestamps.filter(t => now - t <= 1000);
+        resetClickTimestamps.push(now);
+        
+        if (resetClickTimestamps.length >= 3) {
+            resetClickTimestamps = [];
+            const pwd = prompt("🔐 管理员验证\n请输入密码查看后台数据：");
+            if (pwd === ADMIN_PASSWORD) {
+                showAdminData();
+            } else if (pwd !== null) {
+                alert("密码错误，无权限查看后台数据。");
+            }
+            return;
+        }
+        normalReset();
+    }
+    
+    function onCalcButtonClick() {
+        const scoresArr = getScores();
+        if (!scoresArr) {
+            alert("请完成所有6道自测题目（每题任选一项）后再查看结果。");
+            return;
+        }
+        const total = scoresArr.reduce((a,b)=>a+b,0);
+        saveTestRecord(scoresArr, total);
+        showInterpretation(total);
+        document.getElementById("scoreDisplay").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // 二维码生成
+    function generateQRCode() {
+        const container = document.getElementById("qrcodeBox");
+        if (!container) return;
+        container.innerHTML = "";
+        const currentUrl = window.location.href;
+        if (typeof QRCode === 'undefined') {
+            const script = document.createElement('script');
+            script.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+            script.onload = () => createQR(container, currentUrl);
+            script.onerror = () => {
+                container.innerHTML = '<div style="padding:10px; text-align:center;">⚠️ 二维码库加载失败，可手动分享链接</div>';
+            };
+            document.head.appendChild(script);
+        } else {
+            createQR(container, currentUrl);
+        }
+    }
+    function createQR(container, url) {
+        try {
+            container.innerHTML = '';
+            const qrDiv = document.createElement('div');
+            qrDiv.id = 'qr_' + Date.now();
+            container.appendChild(qrDiv);
+            new QRCode(qrDiv, {
+                text: url,
+                width: 110,
+                height: 110,
+                colorDark: "#1f6e43",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
+            const tip = document.createElement('div');
+            tip.innerText = '扫码访问';
+            tip.style.fontSize = '0.7rem';
+            tip.style.marginTop = '8px';
+            container.appendChild(tip);
+            if (url.startsWith('file://')) {
+                const note = document.createElement('div');
+                note.style.fontSize = '0.65rem';
+                note.style.color = '#c96a2e';
+                note.innerText = '本地文件，部署后扫码有效';
+                container.appendChild(note);
+            }
+        } catch(e) {
+            container.innerHTML = `<div style="padding:10px;">📱 二维码生成失败</div>`;
+        }
+    }
+
+    function init() {
+        buildForm();
+        const calcBtn = document.getElementById("calcBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        calcBtn.addEventListener("click", onCalcButtonClick);
+        resetBtn.addEventListener("click", onResetButtonClick);
+        normalReset();
+        generateQRCode();
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('.radio-option');
+            if (target) {
+                const radio = target.querySelector('input[type="radio"]');
+                if (radio && !radio.checked) radio.checked = true;
+            }
+        });
+    }
+    init();
+</script>
+</body>
+</html>
