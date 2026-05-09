@@ -359,7 +359,7 @@
         <div class="qr-info">
             <strong>📱 分享与快速自测</strong><br>
             扫描二维码打开本工具，可转发给朋友。<br>
-            <span style="font-size:0.7rem;">* 二维码会自动生成当前页面地址，部署到服务器后即可扫码访问。</span>
+            <span style="font-size:0.7rem;">* </span>
         </div>
     </div>
 
@@ -684,7 +684,7 @@
                 correctLevel: QRCode.CorrectLevel.L
             });
             const tip = document.createElement('div');
-            tip.innerText = '扫码访问';
+            tip.innerText = '男性健康自测表';
             tip.style.fontSize = '0.7rem';
             tip.style.marginTop = '8px';
             container.appendChild(tip);
@@ -692,7 +692,7 @@
                 const note = document.createElement('div');
                 note.style.fontSize = '0.65rem';
                 note.style.color = '#c96a2e';
-                note.innerText = '本地文件，部署后扫码有效';
+                note.innerText = '';
                 container.appendChild(note);
             }
         } catch(e) {
