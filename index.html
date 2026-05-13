@@ -14,7 +14,7 @@
         body {
             background: linear-gradient(145deg, #eef2f9 0%, #dee6f0 100%);
             font-family: 'Inter', sans-serif;
-            padding: 1.5rem 1rem 3rem;
+            padding: 1.5rem 1rem 2rem;
             color: #1a2c3e;
         }
         .container {
@@ -43,17 +43,6 @@
             margin-top: 8px;
             color: #1f6e43;
             font-weight: 600;
-        }
-        .disclaimer-badge {
-            background: #ffe9e9;
-            border-left: 6px solid #c0392b;
-            padding: 0.8rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #a0322c;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            text-align: center;
         }
         .card {
             background: rgba(255, 255, 255, 0.95);
@@ -195,59 +184,56 @@
             margin: 0.8rem 0;
             border-color: #e0edf7;
         }
-        .qr-container {
+        /* 公用二维码卡片样式：左侧图片，右侧文字 */
+        .qrcard {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
             gap: 1rem;
             background: #ffffffcc;
             border-radius: 1.5rem;
             padding: 1rem 1.5rem;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cfe2ef;
+            flex-wrap: wrap;
         }
-        .qr-box {
+        .qrcard-left {
             background: white;
-            padding: 10px;
+            padding: 8px;
             border-radius: 20px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
-            min-width: 130px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            min-width: 120px;
         }
-        canvas {
+        .qrcard-left canvas, .qrcard-left img {
+            width: 100px;
+            height: 100px;
             display: block;
             margin: 0 auto;
             border-radius: 12px;
         }
-        .qr-info {
+        .qrcard-right {
             flex: 1;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #2a577b;
         }
-        footer {
-            text-align: center;
-            margin-top: 1.8rem;
-            font-size: 0.85rem;
-            color: #2c5a74;
-            padding: 0.5rem;
-            border-top: 1px solid #d0e2ef;
-        }
-        .contact-phone {
-            margin-top: 1rem;
-            font-size: 1rem;
-            font-weight: 600;
+        .qrcard-right strong {
             color: #1f6e43;
+            font-size: 1rem;
+        }
+        .footer-disclaimer {
             text-align: center;
-            background: #eef3fc;
-            display: inline-block;
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 40px;
-            letter-spacing: 1px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #b1624b;
+        }
+        .footer-notice {
+            text-align: center;
+            margin-top: 0.5rem;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            background: #fef7e0;
+            font-size: 0.85rem;
+            color: #a15c2c;
         }
         .modal-overlay {
             position: fixed;
@@ -321,6 +307,7 @@
             .card { padding: 1.2rem; }
             .radio-option { padding: 4px 12px; font-size: 0.75rem; }
             .data-table { font-size: 0.7rem; }
+            .qrcard { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -329,9 +316,6 @@
     <div class="brand">
         <h1>⚕️ 男性健康自测表</h1>
         <div class="brand-tag">美和生殖--男性医学中心</div>
-    </div>
-    <div class="disclaimer-badge">
-        ⚠️ 健康测评不作为诊疗依据。
     </div>
 
     <div class="card">
@@ -354,20 +338,33 @@
         <div id="insightContainer"></div>
     </div>
 
-    <div class="qr-container">
-        <div class="qr-box" id="qrcodeBox"></div>
-        <div class="qr-info">
-            <strong>📱 分享与快速自测</strong><br>
-            扫描二维码打开本工具，可转发给朋友。<br>
-            <span style="font-size:0.7rem;">* </span>
+    <!-- 电话+微信咨询卡片（左侧微信二维码，右侧文字） -->
+    <div class="qrcard">
+        <div class="qrcard-left">
+            <img id="contactWechatImg" src="wechat_qr.png" alt="微信二维码" style="width:100px; height:100px;" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2212%22%3E%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%3C%2Ftext%3E%3C%2Fsvg%3E';">
+        </div>
+        <div class="qrcard-right">
+            <strong>📞 详询 0319-3021530 或 微信咨询</strong><br>
+            如果您对自测结果有疑问，或需要进一步帮助，欢迎添加微信深度咨询。<br>
+            <!-- 已删除替换提示文字 -->
         </div>
     </div>
 
-    <footer>
+    <!-- 工具二维码（男性健康自测表，左侧二维码右侧说明） -->
+    <div class="qrcard">
+        <div class="qrcard-left" id="qrcodeBox"></div>
+        <div class="qrcard-right">
+            <strong>📱 分享与快速自测</strong><br>
+            扫描二维码打开本工具，可转发给朋友。
+        </div>
+    </div>
+
+    <!-- 底部提醒：先显示“健康测评不作为诊疗依据。”再显示“科学自测 · 隐私无忧 · 如有不适，请及时就医” -->
+    <div class="footer-disclaimer">
+        ⚠️ 健康测评不作为诊疗依据。
+    </div>
+    <div class="footer-notice">
         科学自测 · 隐私无忧 · 如有不适，请及时就医
-    </footer>
-    <div class="contact-phone">
-        📞 详询 0319-3021530或微信咨询
     </div>
 </div>
 
@@ -382,7 +379,6 @@
         { text: "双方满意度（你自己的感受）", opts: ["非常不满意，痛苦","不满意","一般","比较满意","很满意"] }
     ];
 
-    // 构建题目表单
     function buildForm() {
         const form = document.getElementById('selfTestForm');
         if (!form) return;
@@ -420,7 +416,6 @@
         }
     }
 
-    // 获取分数数组（未完整填写时返回 null）
     function getScores() {
         let scores = [];
         for (let i = 1; i <= 6; i++) {
@@ -431,23 +426,23 @@
         return scores;
     }
 
-    // 三档解读：结果解读（末尾自动加等级）、核心判断、建议（不带分步和总结）
+    // 三档解读
     const insights = {
-        low: {  // 0-6 重度异常
-            resultBase: "0～6分：性欲、勃起硬度、维持、射精控制、自信、满意度六项均偏弱，整体功能处于偏低水平。",
-            gradeSuffix: "属于重度异常",
-            core: "1. 整体功能全面偏弱，不单是某一项问题；\n2. 很少有正常状态，多半伴随焦虑与身体基础下降；\n3. 大概率是生活方式+心理+潜在器质性因素叠加。",
-            suggestion: "优先就医检查，完善性激素、血糖血脂、血压、甲功、阴茎供血和敏感度等检查，及早对症治疗，恢复空间大。切忌自行服药，避免加重病情。"
+        low: {
+            resultBase: "0～6分：性欲、勃起硬度、维持时间、射精控制、自信心、满意度六项均偏弱，整体功能处于偏低水平，",
+            gradeSuffix: "属于重度异常。",
+            core: "1. 整体功能全面偏弱，不单是某一项问题；\n2. 考虑存在器质性问题，同时伴随身体基础水平下降，以及焦虑等心理问题。\n3. 大概率是生活方式+心理因素+器质性因素叠加所致。",
+            suggestion: "请到正规男科机构就医检查，完善性激素、血糖血脂、血压、甲功、阴茎供血和敏感度等检查，及早对症治疗，恢复空间大。切忌自行服药，避免加重或延误病情。"
         },
-        mid: {  // 7-14 轻度异常
+        mid: {
             resultBase: "7～14分：存在间歇性或轻中度问题（硬度不足、中途疲软或射精控制欠佳），影响生活质量。",
-            gradeSuffix: "属于轻度异常",
-            core: "1. 症状持续3个月内反复出现，超出单纯疲劳；\n2. 心理与生活习惯（熬夜、久坐、压力）为主要推手；\n3. 有较大恢复空间，多数人调整后可改善。",
-            suggestion: "优先找专业大夫做基础评估，明确是心理性、生活习惯还是轻微器质性问题，同时结合生活方式指导，必要时配合药物干预治疗，多数一个月内恢复。不自行乱吃壮阳药、偏方，避免加重。"
+            gradeSuffix: "属于轻度异常。",
+            core: "1. 症状反复出现，多为疲劳、不良生活习惯所致。\n2. 自身器质性问题可能性大，心理因素、生活习惯为辅助因素。\n3. 多数人调整生活或用治疗后可改善，恢复空间大。",
+            suggestion: "优先到正规男科机构做基础评估，明确是心理性、生活方式还是轻微器质性问题，同时结合生活方式指导，必要时配合药物干预治疗，多数1~2个月内恢复。不自行乱吃壮阳药、偏方，避免加重。"
         },
-        high: { // 15-24 正常
+        high: {
             resultBase: "15～24分：性功能各项指标良好，偶尔不满意属生理波动。",
-            gradeSuffix: "属于正常范围",
+            gradeSuffix: "属于正常范围。",
             core: "1. 生理基础良好，血管、神经、激素大概率正常；\n2. 多为心理敏感或偶发疲劳影响；\n3. 无需用药或手术。",
             suggestion: "保持良好心态，均衡饮食，规律作息、适度运动，避免长期熬夜、久坐憋尿。规律性生活，不纵欲、不刻意禁欲，保持身心放松。"
         }
@@ -471,250 +466,159 @@
         document.getElementById("scoreRangeTag").innerText = rangeText + " · " + gradeText;
         document.getElementById("totalScore").innerText = total;
         const container = document.getElementById("insightContainer");
-        // 结果解读：原文本 + 等级后缀
-        const resultText = data.resultBase + " " + data.gradeSuffix;
+        const resultFull = data.resultBase + " " + data.gradeSuffix;
         container.innerHTML = `
             <div class="insight-card">
                 <div class="insight-title">📌 ${type === 'low' ? '🔴 重度异常' : (type === 'mid' ? '🟡 轻度异常' : '🟢 功能正常')}</div>
-                <div><strong>📖 结果解读</strong><br><span class="text-muted">${resultText}</span></div>
+                <div><strong>📖 结果解读</strong><br><span class="text-muted">${resultFull}</span></div>
                 <div class="section-head">🎯 核心判断</div>
                 <div class="text-muted" style="white-space: pre-line;">${data.core}</div>
                 <div class="section-head">💡 建议</div>
                 <div class="text-muted">${data.suggestion}</div>
-                <hr><div class="text-muted" style="font-size:0.75rem;">※ 自测基于最近3个月，持续不适请及时就医。</div>
             </div>
         `;
         document.getElementById("scoreDisplay").style.display = "block";
     }
 
-    // ========== 历史记录存储 ==========
+    // 历史记录存储（管理员功能）
     const STORAGE_KEY = "male_health_test_history";
-    
     function saveTestRecord(scores, total) {
         try {
             let history = localStorage.getItem(STORAGE_KEY);
             let records = history ? JSON.parse(history) : [];
-            const record = {
-                timestamp: new Date().toLocaleString(),
-                scores: [...scores],
-                total: total
-            };
-            records.unshift(record);
+            records.unshift({ timestamp: new Date().toLocaleString(), scores: [...scores], total: total });
             if (records.length > 200) records = records.slice(0, 200);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-        } catch(e) { console.warn("存储失败", e); }
+        } catch(e) { console.warn(e); }
     }
-
     function getHistory() {
         const raw = localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : [];
     }
-
-    function clearHistory() {
-        localStorage.removeItem(STORAGE_KEY);
-    }
-
+    function clearHistory() { localStorage.removeItem(STORAGE_KEY); }
     function exportToCSV() {
         const history = getHistory();
-        if (history.length === 0) {
-            alert("暂无历史数据可导出。");
-            return;
-        }
-        const headers = ["序号", "测试时间", "Q1性欲", "Q2勃起硬度", "Q3维持时间", "Q4射精控制", "Q5自信焦虑", "Q6满意度", "总分"];
+        if (!history.length) { alert("暂无历史数据"); return; }
+        const headers = ["序号","测试时间","Q1性欲","Q2勃起硬度","Q3维持时间","Q4射精控制","Q5自信焦虑","Q6满意度","总分"];
         const rows = [headers];
-        history.forEach((rec, idx) => {
-            rows.push([
-                (idx+1).toString(),
-                rec.timestamp,
-                rec.scores[0].toString(),
-                rec.scores[1].toString(),
-                rec.scores[2].toString(),
-                rec.scores[3].toString(),
-                rec.scores[4].toString(),
-                rec.scores[5].toString(),
-                rec.total.toString()
-            ]);
-        });
-        const csvContent = rows.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n");
-        const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        const url = URL.createObjectURL(blob);
-        link.href = url;
-        link.setAttribute("download", "男性健康自测数据.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        alert("导出成功！");
+        history.forEach((rec, i) => rows.push([i+1, rec.timestamp, ...rec.scores, rec.total]));
+        const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+        const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "男性健康自测数据.csv";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        alert("导出成功");
     }
-
     function showAdminData() {
         const history = getHistory();
-        const modalOverlay = document.createElement('div');
-        modalOverlay.className = 'modal-overlay';
-        const modalDiv = document.createElement('div');
-        modalDiv.className = 'modal-container';
-        
-        let tableHtml = `<h3>📊 后台测试记录 (共 ${history.length} 条)</h3>`;
-        if (history.length === 0) {
-            tableHtml += `<p class="text-muted">暂无历史数据。每次计算总分后会自动保存记录。</p>`;
-        } else {
-            tableHtml += `<div style="overflow-x: auto;"><table class="data-table"><thead><tr><th>序号</th><th>时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th></tr></thead><tbody>`;
-            for (let i = 0; i < history.length; i++) {
-                const rec = history[i];
-                tableHtml += `<tr>
-                    <td>${i+1}</td>
-                    <td>${rec.timestamp}</td>
-                    ${rec.scores.map(s => `<td>${s}</td>`).join('')}
-                    <td><strong>${rec.total}</strong></td>
-                </tr>`;
-            }
-            tableHtml += `</tbody></table></div>`;
+        const modal = document.createElement('div'); modal.className = 'modal-overlay';
+        const box = document.createElement('div'); box.className = 'modal-container';
+        let html = `<h3>📊 后台测试记录 (${history.length}条)</h3>`;
+        if (!history.length) html += `<p>暂无数据</p>`;
+        else {
+            html += `<div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>序号</th><th>时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th></table></thead><tbody>`;
+            history.forEach((r,i) => {
+                html += `<tr><td>${i+1}</td><td>${r.timestamp}</td>${r.scores.map(s=>`<td>${s}</td>`).join('')}<td><strong>${r.total}</strong></td></tr>`;
+            });
+            html += `</tbody></table></div>`;
         }
-        modalDiv.innerHTML = tableHtml;
-        
-        const actionsDiv = document.createElement('div');
-        actionsDiv.className = 'modal-actions';
-        const closeBtn = document.createElement('button');
-        closeBtn.innerText = '关闭';
-        closeBtn.className = 'close-modal';
-        closeBtn.onclick = () => document.body.removeChild(modalOverlay);
-        actionsDiv.appendChild(closeBtn);
-        
-        if (history.length > 0) {
-            const exportBtn = document.createElement('button');
-            exportBtn.innerText = '📎 导出为 CSV';
-            exportBtn.className = 'export-btn';
-            exportBtn.style.background = "#2c7a4d";
-            exportBtn.onclick = () => { exportToCSV(); };
-            actionsDiv.appendChild(exportBtn);
-            
-            const clearBtn = document.createElement('button');
-            clearBtn.innerText = '🗑️ 清空所有记录';
-            clearBtn.className = 'clear-history';
-            clearBtn.onclick = () => {
-                if (confirm('确认清空所有历史测试记录吗？')) {
-                    clearHistory();
-                    document.body.removeChild(modalOverlay);
-                    alert('历史记录已清空');
-                }
-            };
-            actionsDiv.appendChild(clearBtn);
+        box.innerHTML = html;
+        const actions = document.createElement('div'); actions.className = 'modal-actions';
+        const close = document.createElement('button'); close.innerText = '关闭'; close.className = 'close-modal'; close.onclick = () => modal.remove();
+        actions.appendChild(close);
+        if (history.length) {
+            const exp = document.createElement('button'); exp.innerText = '📎 导出CSV'; exp.className = 'export-btn'; exp.onclick = () => exportToCSV();
+            const clear = document.createElement('button'); clear.innerText = '🗑️ 清空'; clear.className = 'clear-history'; clear.onclick = () => { if(confirm('清空所有记录？')) { clearHistory(); modal.remove(); alert('已清空'); } };
+            actions.appendChild(exp); actions.appendChild(clear);
         }
-        modalDiv.appendChild(actionsDiv);
-        modalOverlay.appendChild(modalDiv);
-        document.body.appendChild(modalOverlay);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) document.body.removeChild(modalOverlay);
-        });
+        box.appendChild(actions);
+        modal.appendChild(box);
+        document.body.appendChild(modal);
+        modal.addEventListener('click', (e) => { if(e.target === modal) modal.remove(); });
     }
 
-    // ========== 重置按钮：连续点击3次触发管理员后台 ==========
-    let resetClickTimestamps = [];
-    const ADMIN_PASSWORD = "A123888";
-    
+    // 重置按钮连续3次触发管理员
+    let resetClicks = [];
     function normalReset() {
-        for (let i = 1; i <= 6; i++) {
-            document.querySelectorAll(`input[name="q_${i}"]`).forEach(r => r.checked = false);
-        }
+        for (let i=1;i<=6;i++) document.querySelectorAll(`input[name="q_${i}"]`).forEach(r=>r.checked=false);
         document.getElementById("scoreDisplay").style.display = "none";
         document.getElementById("insightContainer").innerHTML = `<div class="text-muted" style="padding:1rem; text-align:center;">✨ 完成自测后点击「计算总分与解读」获取详细建议 ✨</div>`;
     }
-    
-    function onResetButtonClick() {
+    function onResetClick() {
         const now = Date.now();
-        resetClickTimestamps = resetClickTimestamps.filter(t => now - t <= 1000);
-        resetClickTimestamps.push(now);
-        
-        if (resetClickTimestamps.length >= 3) {
-            resetClickTimestamps = [];
-            const pwd = prompt("🔐 管理员验证\n请输入密码查看后台数据：");
-            if (pwd === ADMIN_PASSWORD) {
-                showAdminData();
-            } else if (pwd !== null) {
-                alert("密码错误，无权限查看后台数据。");
-            }
+        resetClicks = resetClicks.filter(t => now - t <= 1000);
+        resetClicks.push(now);
+        if (resetClicks.length >= 3) {
+            resetClicks = [];
+            const pwd = prompt("🔐 管理员验证\n请输入密码：");
+            if (pwd === "A123888") showAdminData();
+            else if (pwd !== null) alert("密码错误");
             return;
         }
         normalReset();
     }
-    
-    function onCalcButtonClick() {
-        const scoresArr = getScores();
-        if (!scoresArr) {
-            alert("请完成所有6道自测题目（每题任选一项）后再查看结果。");
-            return;
-        }
-        const total = scoresArr.reduce((a,b)=>a+b,0);
-        saveTestRecord(scoresArr, total);
+    function onCalcClick() {
+        const scores = getScores();
+        if (!scores) { alert("请完成所有题目"); return; }
+        const total = scores.reduce((a,b)=>a+b,0);
+        saveTestRecord(scores, total);
         showInterpretation(total);
         document.getElementById("scoreDisplay").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // 二维码生成
+    // 生成工具二维码
     function generateQRCode() {
         const container = document.getElementById("qrcodeBox");
         if (!container) return;
         container.innerHTML = "";
-        const currentUrl = window.location.href;
+        const url = window.location.href;
         if (typeof QRCode === 'undefined') {
-            const script = document.createElement('script');
-            script.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
-            script.onload = () => createQR(container, currentUrl);
-            script.onerror = () => {
-                container.innerHTML = '<div style="padding:10px; text-align:center;">⚠️ 二维码库加载失败，可手动分享链接</div>';
-            };
-            document.head.appendChild(script);
-        } else {
-            createQR(container, currentUrl);
-        }
+            const s = document.createElement('script');
+            s.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+            s.onload = () => createQR(container, url);
+            s.onerror = () => container.innerHTML = '<div>⚠️ 二维码加载失败</div>';
+            document.head.appendChild(s);
+        } else createQR(container, url);
     }
     function createQR(container, url) {
         try {
             container.innerHTML = '';
-            const qrDiv = document.createElement('div');
-            qrDiv.id = 'qr_' + Date.now();
-            container.appendChild(qrDiv);
-            new QRCode(qrDiv, {
-                text: url,
-                width: 110,
-                height: 110,
-                colorDark: "#1f6e43",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.L
-            });
-            const tip = document.createElement('div');
-            tip.innerText = '男性健康自测表';
-            tip.style.fontSize = '0.7rem';
-            tip.style.marginTop = '8px';
-            container.appendChild(tip);
-            if (url.startsWith('file://')) {
-                const note = document.createElement('div');
-                note.style.fontSize = '0.65rem';
-                note.style.color = '#c96a2e';
-                note.innerText = '';
-                container.appendChild(note);
-            }
-        } catch(e) {
-            container.innerHTML = `<div style="padding:10px;">📱 二维码生成失败</div>`;
-        }
+            const div = document.createElement('div');
+            div.id = 'qr_' + Date.now();
+            container.appendChild(div);
+            new QRCode(div, { text: url, width: 100, height: 100, colorDark: "#1f6e43", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L });
+        } catch(e) { container.innerHTML = '<div>二维码生成失败</div>'; }
     }
 
     function init() {
         buildForm();
-        const calcBtn = document.getElementById("calcBtn");
-        const resetBtn = document.getElementById("resetBtn");
-        calcBtn.addEventListener("click", onCalcButtonClick);
-        resetBtn.addEventListener("click", onResetButtonClick);
+        document.getElementById("calcBtn").addEventListener("click", onCalcClick);
+        document.getElementById("resetBtn").addEventListener("click", onResetClick);
         normalReset();
         generateQRCode();
         document.addEventListener('click', (e) => {
-            const target = e.target.closest('.radio-option');
-            if (target) {
-                const radio = target.querySelector('input[type="radio"]');
+            const opt = e.target.closest('.radio-option');
+            if (opt) {
+                const radio = opt.querySelector('input[type="radio"]');
                 if (radio && !radio.checked) radio.checked = true;
             }
         });
+        // 微信二维码点击放大
+        const wechatImg = document.getElementById('contactWechatImg');
+        if (wechatImg) {
+            wechatImg.addEventListener('click', () => {
+                const modal = document.createElement('div'); modal.className = 'modal-overlay';
+                const box = document.createElement('div'); box.className = 'modal-container'; box.style.textAlign = 'center';
+                box.innerHTML = `<h3>微信咨询二维码</h3><img src="wechat_qr.png" style="width:200px;height:200px;margin:1rem auto;border-radius:20px;" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2214%22%3E%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%9C%AA%E6%89%BE%E5%88%B0%3C%2Ftext%3E%3C%2Fsvg%3E';"><br><button class="close-modal" style="margin-top:1rem;">关闭</button>`;
+                const closeBtn = box.querySelector('.close-modal');
+                closeBtn.onclick = () => modal.remove();
+                modal.appendChild(box);
+                document.body.appendChild(modal);
+                modal.addEventListener('click', (e) => { if(e.target === modal) modal.remove(); });
+            });
+        }
     }
     init();
 </script>
