@@ -6,6 +6,7 @@
     <title>男性健康自测表 | 美和生殖--男性医学中心</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ==================== 全局样式 ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -21,6 +22,7 @@
             max-width: 960px;
             margin: 0 auto;
         }
+        /* 品牌区域 */
         .brand {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -44,6 +46,20 @@
             color: #1f6e43;
             font-weight: 600;
         }
+        /* 微信环境提示 */
+        .mobile-warning {
+            background-color: #fff3e0;
+            border-left: 5px solid #e67e22;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #b85b14;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* 主卡片 */
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(2px);
@@ -53,6 +69,7 @@
             margin-bottom: 1.8rem;
             border: 1px solid rgba(255,255,255,0.7);
         }
+        /* 题目样式 */
         .question-item {
             margin-bottom: 2rem;
             padding-bottom: 0.8rem;
@@ -107,6 +124,7 @@
             cursor: pointer;
             pointer-events: auto;
         }
+        /* 按钮 */
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -143,6 +161,7 @@
         .btn-secondary:hover {
             background: #e2eaf3;
         }
+        /* 分数展示 */
         .score-area {
             background: linear-gradient(115deg, #f1f8fe, #ffffff);
             border-radius: 1.5rem;
@@ -156,6 +175,7 @@
             font-weight: 800;
             color: #1f6e43;
         }
+        /* 解读卡片 */
         .insight-card {
             background: #ffffffea;
             border-radius: 1.5rem;
@@ -180,12 +200,49 @@
             font-size: 0.88rem;
             line-height: 1.48;
         }
-        hr {
-            margin: 0.8rem 0;
-            border-color: #e0edf7;
+        /* 二维码卡片布局（支持双码） */
+        .qr-card-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
-        /* 公用二维码卡片样式：左侧图片，右侧文字 */
         .qrcard {
+            flex: 1;
+            min-width: 240px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #ffffffcc;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #cfe2ef;
+            backdrop-filter: blur(2px);
+        }
+        .qrcard-left {
+            background: white;
+            padding: 8px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .qrcard-left img {
+            width: 90px;
+            height: 90px;
+            display: block;
+            border-radius: 12px;
+        }
+        .qrcard-right {
+            flex: 1;
+            font-size: 0.8rem;
+            color: #2a577b;
+        }
+        .qrcard-right strong {
+            color: #1f6e43;
+            font-size: 0.9rem;
+        }
+        /* 工具二维码单独卡片 */
+        .tool-qrcard {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -194,32 +251,21 @@
             padding: 1rem 1.5rem;
             margin-bottom: 1rem;
             border: 1px solid #cfe2ef;
-            flex-wrap: wrap;
         }
-        .qrcard-left {
+        .tool-qrcard-left {
             background: white;
             padding: 8px;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
-            min-width: 120px;
         }
-        .qrcard-left canvas, .qrcard-left img {
-            width: 100px;
-            height: 100px;
+        .tool-qrcard-left canvas {
+            width: 90px;
+            height: 90px;
             display: block;
-            margin: 0 auto;
             border-radius: 12px;
         }
-        .qrcard-right {
-            flex: 1;
-            font-size: 0.85rem;
-            color: #2a577b;
-        }
-        .qrcard-right strong {
-            color: #1f6e43;
-            font-size: 1rem;
-        }
+        /* 底部 */
         .footer-disclaimer {
             text-align: center;
             margin-top: 1rem;
@@ -235,6 +281,7 @@
             font-size: 0.85rem;
             color: #a15c2c;
         }
+        /* 后台模态框 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -251,34 +298,76 @@
         .modal-container {
             background: white;
             border-radius: 2rem;
-            max-width: 90%;
-            width: 850px;
+            max-width: 95%;
+            width: 1000px;
             max-height: 85vh;
-            overflow: auto;
-            padding: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            font-family: 'Inter', sans-serif;
         }
-        .modal-container h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0eef7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .modal-header h3 {
             color: #1f6e43;
+            font-size: 1.3rem;
         }
-        .data-table {
+        .stats-badge {
+            background: #eef3fc;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+        .modal-body {
+            overflow: auto;
+            padding: 1rem 1.5rem;
+            flex: 1;
+        }
+        .admin-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.8rem;
+            border-radius: 1rem;
+            overflow: hidden;
         }
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
+        .admin-table th {
+            background: #1f6e43;
+            color: white;
+            padding: 10px 8px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        .admin-table td {
             padding: 8px 6px;
+            border-bottom: 1px solid #e2edf7;
             text-align: center;
         }
-        .data-table th {
-            background: #eef3fc;
-            font-weight: 600;
+        .admin-table tr:nth-child(even) {
+            background-color: #f9fbfe;
         }
-        .close-modal, .export-btn {
+        .admin-table tr:hover {
+            background-color: #eef3fc;
+        }
+        .level-normal { color: #2c7a4d; font-weight: 600; }
+        .level-mild { color: #e67e22; font-weight: 600; }
+        .level-severe { color: #c0392b; font-weight: 600; }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e0eef7;
+            flex-wrap: wrap;
+        }
+        .close-modal, .export-btn, .clear-history {
             background: #1f6e43;
             color: white;
             border: none;
@@ -286,50 +375,41 @@
             border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
-            margin-right: 10px;
         }
-        .clear-history {
-            background: #c72a2a;
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-        }
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
+        .clear-history { background: #c72a2a; }
         @media (max-width: 600px) {
             .card { padding: 1.2rem; }
             .radio-option { padding: 4px 12px; font-size: 0.75rem; }
-            .data-table { font-size: 0.7rem; }
-            .qrcard { flex-direction: column; text-align: center; }
+            .admin-table { font-size: 0.7rem; }
+            .qr-card-group { flex-direction: column; }
+            .qrcard { width: 100%; }
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- 头部品牌 -->
     <div class="brand">
         <h1>⚕️ 男性健康自测表</h1>
         <div class="brand-tag">美和生殖--男性医学中心</div>
     </div>
 
+    <!-- 微信环境提示 -->
+    <div id="wechatWarning" class="mobile-warning" style="display: none;">
+        ⚠️ 检测到您正在微信内浏览。为正常查看后台数据及导出文件，请点击右上角「…」→「在浏览器中打开」。
+    </div>
+
+    <!-- 自测主卡片 -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
             <h3 style="font-weight: 600;">📋 6项核心自测</h3>
             <span style="font-size: 0.7rem;">0=几乎没有 &nbsp; 4=几乎总是</span>
         </div>
         <form id="selfTestForm"></form>
-
         <div class="action-buttons">
             <button class="btn btn-primary" id="calcBtn">📊 计算总分 & 获取解读</button>
             <button class="btn btn-secondary" id="resetBtn">🔄 重置所有选项</button>
         </div>
-
         <div id="scoreDisplay" class="score-area" style="display: none;">
             <div>您的总分</div>
             <div class="score-value" id="totalScore">0</div>
@@ -338,28 +418,42 @@
         <div id="insightContainer"></div>
     </div>
 
-    <!-- 电话+微信咨询卡片（左侧微信二维码，右侧文字） -->
-    <div class="qrcard">
-        <div class="qrcard-left">
-            <img id="contactWechatImg" src="wechat_qr.png" alt="微信二维码" style="width:100px; height:100px;" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2212%22%3E%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%3C%2Ftext%3E%3C%2Fsvg%3E';">
+    <!-- 双微信咨询二维码卡片组 -->
+    <div class="qr-card-group">
+        <!-- 微信码 1 -->
+        <div class="qrcard">
+            <div class="qrcard-left">
+                <img id="wechatImg1" src="wechat_qr1.png" alt="微信二维码1" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2290%22%20height%3D%2290%22%20viewBox%3D%220%200%2090%2090%22%3E%3Crect%20width%3D%2290%22%20height%3D%2290%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2210%22%3E%E5%BE%AE%E4%BF%A1%E7%A0%811%3C%2Ftext%3E%3C%2Fsvg%3E';">
+            </div>
+            <div class="qrcard-right">
+                <strong>📞 详询 0319-3021530</strong><br>
+                添加微信，获取一对一专业指导。<br>
+                <span style="font-size:0.7rem;">（生殖院区）</span>
+            </div>
         </div>
-        <div class="qrcard-right">
-            <strong>📞 详询 0319-3021530 或 微信咨询</strong><br>
-            如果您对自测结果有疑问，或需要进一步帮助，欢迎添加微信深度咨询。<br>
-            <!-- 已删除替换提示文字 -->
+        <!-- 微信码 2 -->
+        <div class="qrcard">
+            <div class="qrcard-left">
+                <img id="wechatImg2" src="wechat_qr2.png" alt="微信二维码2" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2290%22%20height%3D%2290%22%20viewBox%3D%220%200%2090%2090%22%3E%3Crect%20width%3D%2290%22%20height%3D%2290%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2210%22%3E%E5%BE%AE%E4%BF%A1%E7%A0%812%3C%2Ftext%3E%3C%2Fsvg%3E';">
+            </div>
+            <div class="qrcard-right">
+                <strong>💬 微信深度咨询</strong><br>
+                添加微信，获取一对一专业指导。<br>
+                <span style="font-size:0.7rem;">（美和院区）</span>
+            </div>
         </div>
     </div>
 
-    <!-- 工具二维码（男性健康自测表，左侧二维码右侧说明） -->
-    <div class="qrcard">
-        <div class="qrcard-left" id="qrcodeBox"></div>
+    <!-- 工具二维码（本页面分享码） -->
+    <div class="tool-qrcard">
+        <div class="tool-qrcard-left" id="qrcodeBox"></div>
         <div class="qrcard-right">
             <strong>📱 分享与快速自测</strong><br>
             扫描二维码打开本工具，可转发给朋友。
         </div>
     </div>
 
-    <!-- 底部提醒：先显示“健康测评不作为诊疗依据。”再显示“科学自测 · 隐私无忧 · 如有不适，请及时就医” -->
+    <!-- 底部说明 -->
     <div class="footer-disclaimer">
         ⚠️ 健康测评不作为诊疗依据。
     </div>
@@ -369,7 +463,8 @@
 </div>
 
 <script>
-    // ---------- 题目数据 ----------
+    /* ==================== 医学自测核心逻辑 ==================== */
+    // 题目数据
     const questions = [
         { text: "性欲（想做的欲望）", opts: ["完全没兴趣","很少有想法","偶尔有","正常","和以前差不多/很强"] },
         { text: "勃起硬度（关键）", opts: ["完全无法勃起","能勃起但太软，无法进入","能勃起但硬度不足，勉强进入","硬度足够，但偶尔不持久","硬度足够、稳定，满意"] },
@@ -379,6 +474,7 @@
         { text: "双方满意度（你自己的感受）", opts: ["非常不满意，痛苦","不满意","一般","比较满意","很满意"] }
     ];
 
+    // 构建题目表单
     function buildForm() {
         const form = document.getElementById('selfTestForm');
         if (!form) return;
@@ -391,7 +487,6 @@
             titleDiv.className = 'question-text';
             titleDiv.innerHTML = `<span class="q-num">${i+1}</span> ${q.text}`;
             qDiv.appendChild(titleDiv);
-            
             const optionsDiv = document.createElement('div');
             optionsDiv.className = 'options-group';
             const groupName = `q_${i+1}`;
@@ -416,6 +511,7 @@
         }
     }
 
+    // 获取分数
     function getScores() {
         let scores = [];
         for (let i = 1; i <= 6; i++) {
@@ -426,7 +522,7 @@
         return scores;
     }
 
-    // 三档解读
+    // 解读内容（含等级、核心判断、建议）
     const insights = {
         low: {
             resultBase: "0～6分：性欲、勃起硬度、维持时间、射精控制、自信心、满意度六项均偏弱，整体功能处于偏低水平，",
@@ -449,18 +545,10 @@
     };
 
     function showInterpretation(total) {
-        let type;
-        let gradeText;
-        if (total <= 6) {
-            type = 'low';
-            gradeText = "重度异常";
-        } else if (total <= 14) {
-            type = 'mid';
-            gradeText = "轻度异常";
-        } else {
-            type = 'high';
-            gradeText = "正常";
-        }
+        let type, gradeText;
+        if (total <= 6) { type = 'low'; gradeText = "重度异常"; }
+        else if (total <= 14) { type = 'mid'; gradeText = "轻度异常"; }
+        else { type = 'high'; gradeText = "正常"; }
         const data = insights[type];
         const rangeText = total <=6 ? "0～6分" : (total <=14 ? "7～14分" : "15～24分");
         document.getElementById("scoreRangeTag").innerText = rangeText + " · " + gradeText;
@@ -480,66 +568,119 @@
         document.getElementById("scoreDisplay").style.display = "block";
     }
 
-    // 历史记录存储（管理员功能）
+    /* ==================== 数据存储与后台管理 ==================== */
     const STORAGE_KEY = "male_health_test_history";
     function saveTestRecord(scores, total) {
         try {
-            let history = localStorage.getItem(STORAGE_KEY);
-            let records = history ? JSON.parse(history) : [];
-            records.unshift({ timestamp: new Date().toLocaleString(), scores: [...scores], total: total });
+            let records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+            records.unshift({ timestamp: new Date().toLocaleString(), scores, total });
             if (records.length > 200) records = records.slice(0, 200);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
         } catch(e) { console.warn(e); }
     }
     function getHistory() {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     }
-    function clearHistory() { localStorage.removeItem(STORAGE_KEY); }
-    function exportToCSV() {
+    function clearHistory() {
+        localStorage.removeItem(STORAGE_KEY);
+    }
+
+    // 等级辅助
+    function getGradeInfo(total) {
+        if (total <= 6) return { text: "重度异常", class: "level-severe" };
+        if (total <= 14) return { text: "轻度异常", class: "level-mild" };
+        return { text: "正常", class: "level-normal" };
+    }
+
+    // 导出 XLS (HTML格式)
+    function exportToXLS() {
         const history = getHistory();
-        if (!history.length) { alert("暂无历史数据"); return; }
-        const headers = ["序号","测试时间","Q1性欲","Q2勃起硬度","Q3维持时间","Q4射精控制","Q5自信焦虑","Q6满意度","总分"];
-        const rows = [headers];
-        history.forEach((rec, i) => rows.push([i+1, rec.timestamp, ...rec.scores, rec.total]));
-        const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
-        const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = "男性健康自测数据.csv";
-        a.click();
-        URL.revokeObjectURL(a.href);
-        alert("导出成功");
+        if (!history.length) { alert("暂无历史数据可导出。"); return; }
+        let html = `<html><head><meta charset="UTF-8"><title>男性健康自测记录</title></head><body>
+        <h2>男性健康自测记录</h2>
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+        <thead><tr><th>序号</th><th>测试时间</th><th>Q1性欲</th><th>Q2勃起硬度</th><th>Q3维持时间</th><th>Q4射精控制</th><th>Q5自信焦虑</th><th>Q6满意度</th><th>总分</th><th>等级</th></tr></thead><tbody>`;
+        history.forEach((rec, idx) => {
+            const grade = getGradeInfo(rec.total);
+            html += `<tr><td>${idx+1}</td><td>${rec.timestamp}</td>${rec.scores.map(s => `<td>${s}</td>`).join('')}<td><strong>${rec.total}</strong></td><td>${grade.text}</td></tr>`;
+        });
+        html += `</tbody></table><p>导出时间：${new Date().toLocaleString()}</p></body></html>`;
+        const blob = new Blob([html], { type: "application/vnd.ms-excel" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = "男性健康自测数据.xls";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        alert("导出成功！");
     }
+
+    // 后台模态框（优化表格+统计）
     function showAdminData() {
         const history = getHistory();
         const modal = document.createElement('div'); modal.className = 'modal-overlay';
-        const box = document.createElement('div'); box.className = 'modal-container';
-        let html = `<h3>📊 后台测试记录 (${history.length}条)</h3>`;
-        if (!history.length) html += `<p>暂无数据</p>`;
-        else {
-            html += `<div style="overflow-x:auto;"><table class="data-table"><thead><tr><th>序号</th><th>时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th></table></thead><tbody>`;
-            history.forEach((r,i) => {
-                html += `<tr><td>${i+1}</td><td>${r.timestamp}</td>${r.scores.map(s=>`<td>${s}</td>`).join('')}<td><strong>${r.total}</strong></td></tr>`;
-            });
-            html += `</tbody></table></div>`;
-        }
-        box.innerHTML = html;
-        const actions = document.createElement('div'); actions.className = 'modal-actions';
-        const close = document.createElement('button'); close.innerText = '关闭'; close.className = 'close-modal'; close.onclick = () => modal.remove();
-        actions.appendChild(close);
+        const modalContainer = document.createElement('div'); modalContainer.className = 'modal-container';
+        let avgTotal = 0;
+        history.forEach(r => avgTotal += r.total);
+        const avg = history.length ? (avgTotal / history.length).toFixed(1) : 0;
+        const normalCount = history.filter(r => r.total >= 15).length;
+        const mildCount = history.filter(r => r.total >= 7 && r.total <= 14).length;
+        const severeCount = history.filter(r => r.total <= 6).length;
+
+        modalContainer.innerHTML = `
+            <div class="modal-header">
+                <h3>📋 后台测试记录</h3>
+                <div class="stats-badge">总记录 ${history.length} 条 | 平均分 ${avg} | 正常 ${normalCount} / 轻度 ${mildCount} / 重度 ${severeCount}</div>
+            </div>
+            <div class="modal-body">
+                ${history.length === 0 ? '<p class="text-muted" style="text-align:center;">暂无历史数据。每次计算总分后会自动保存记录。</p>' : `
+                <table class="admin-table">
+                    <thead><tr><th>序号</th><th>测试时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th><th>等级</th></tr></thead>
+                    <tbody>
+                        ${history.map((rec, idx) => {
+                            const grade = getGradeInfo(rec.total);
+                            return `<tr>
+                                <td>${idx+1}</td>
+                                <td>${rec.timestamp}</td>
+                                ${rec.scores.map(s => `<td>${s}</td>`).join('')}
+                                <td><strong>${rec.total}</strong></td>
+                                <td class="${grade.class}">${grade.text}</td>
+                            </tr>`;
+                        }).join('')}
+                    </tbody>
+                </table>
+                `}
+            </div>
+            <div class="modal-actions">
+                <button class="close-modal">关闭</button>
+                ${history.length ? `<button class="export-btn">📎 导出 XLS</button><button class="clear-history">🗑️ 清空所有记录</button>` : ''}
+            </div>
+        `;
+        modalContainer.querySelector('.close-modal')?.addEventListener('click', () => modal.remove());
         if (history.length) {
-            const exp = document.createElement('button'); exp.innerText = '📎 导出CSV'; exp.className = 'export-btn'; exp.onclick = () => exportToCSV();
-            const clear = document.createElement('button'); clear.innerText = '🗑️ 清空'; clear.className = 'clear-history'; clear.onclick = () => { if(confirm('清空所有记录？')) { clearHistory(); modal.remove(); alert('已清空'); } };
-            actions.appendChild(exp); actions.appendChild(clear);
+            modalContainer.querySelector('.export-btn')?.addEventListener('click', () => {
+                if (/MicroMessenger/i.test(navigator.userAgent)) {
+                    alert("微信内可能无法直接下载文件，请点击右上角「…」在浏览器中打开后再导出。");
+                }
+                exportToXLS();
+            });
+            modalContainer.querySelector('.clear-history')?.addEventListener('click', () => {
+                if (confirm('确认清空所有历史测试记录吗？')) {
+                    clearHistory();
+                    modal.remove();
+                    alert('历史记录已清空');
+                }
+            });
         }
-        box.appendChild(actions);
-        modal.appendChild(box);
+        modal.appendChild(modalContainer);
         document.body.appendChild(modal);
-        modal.addEventListener('click', (e) => { if(e.target === modal) modal.remove(); });
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
     }
 
-    // 重置按钮连续3次触发管理员
+    /* ==================== 交互事件 ==================== */
+    // 重置按钮连续点击3次触发管理员后台
     let resetClicks = [];
     function normalReset() {
         for (let i=1;i<=6;i++) document.querySelectorAll(`input[name="q_${i}"]`).forEach(r=>r.checked=false);
@@ -552,34 +693,34 @@
         resetClicks.push(now);
         if (resetClicks.length >= 3) {
             resetClicks = [];
-            const pwd = prompt("🔐 管理员验证\n请输入密码：");
+            const pwd = prompt("🔐 管理员验证\n请输入密码查看后台数据：");
             if (pwd === "A123888") showAdminData();
-            else if (pwd !== null) alert("密码错误");
+            else if (pwd !== null) alert("密码错误，无权限查看后台数据。");
             return;
         }
         normalReset();
     }
     function onCalcClick() {
         const scores = getScores();
-        if (!scores) { alert("请完成所有题目"); return; }
+        if (!scores) { alert("请完成所有6道自测题目后再查看结果。"); return; }
         const total = scores.reduce((a,b)=>a+b,0);
         saveTestRecord(scores, total);
         showInterpretation(total);
         document.getElementById("scoreDisplay").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // 生成工具二维码
+    /* ==================== 二维码生成 ==================== */
     function generateQRCode() {
         const container = document.getElementById("qrcodeBox");
         if (!container) return;
         container.innerHTML = "";
         const url = window.location.href;
         if (typeof QRCode === 'undefined') {
-            const s = document.createElement('script');
-            s.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
-            s.onload = () => createQR(container, url);
-            s.onerror = () => container.innerHTML = '<div>⚠️ 二维码加载失败</div>';
-            document.head.appendChild(s);
+            const script = document.createElement('script');
+            script.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+            script.onload = () => createQR(container, url);
+            script.onerror = () => container.innerHTML = '<div>⚠️ 二维码加载失败</div>';
+            document.head.appendChild(script);
         } else createQR(container, url);
     }
     function createQR(container, url) {
@@ -588,16 +729,47 @@
             const div = document.createElement('div');
             div.id = 'qr_' + Date.now();
             container.appendChild(div);
-            new QRCode(div, { text: url, width: 100, height: 100, colorDark: "#1f6e43", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L });
+            new QRCode(div, { text: url, width: 90, height: 90, colorDark: "#1f6e43", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L });
         } catch(e) { container.innerHTML = '<div>二维码生成失败</div>'; }
     }
 
+    // 微信环境提示
+    function checkWechat() {
+        if (/MicroMessenger/i.test(navigator.userAgent)) {
+            const warnDiv = document.getElementById('wechatWarning');
+            if (warnDiv) warnDiv.style.display = 'flex';
+        }
+    }
+
+    // 二维码点击放大功能
+    function enlargeImage(imgElement, title = "微信咨询二维码") {
+        if (!imgElement) return;
+        imgElement.addEventListener('click', () => {
+            const modal = document.createElement('div'); modal.className = 'modal-overlay';
+            const box = document.createElement('div'); box.className = 'modal-container'; box.style.textAlign = 'center';
+            box.innerHTML = `<h3>${title}</h3><img src="${imgElement.src}" style="width:200px;height:200px;margin:1rem auto;border-radius:20px;"><br><button class="close-modal" style="margin:1rem auto 0;">关闭</button>`;
+            const closeBtn = box.querySelector('.close-modal');
+            closeBtn.onclick = () => modal.remove();
+            modal.appendChild(box);
+            document.body.appendChild(modal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+        });
+    }
+
+    /* ==================== 初始化入口 ==================== */
     function init() {
         buildForm();
         document.getElementById("calcBtn").addEventListener("click", onCalcClick);
         document.getElementById("resetBtn").addEventListener("click", onResetClick);
         normalReset();
         generateQRCode();
+        checkWechat();
+        // 为两个微信二维码添加放大功能
+        const img1 = document.getElementById('wechatImg1');
+        const img2 = document.getElementById('wechatImg2');
+        if (img1) enlargeImage(img1, "微信咨询1");
+        if (img2) enlargeImage(img2, "微信咨询2");
+        // 点击label优化
         document.addEventListener('click', (e) => {
             const opt = e.target.closest('.radio-option');
             if (opt) {
@@ -605,20 +777,6 @@
                 if (radio && !radio.checked) radio.checked = true;
             }
         });
-        // 微信二维码点击放大
-        const wechatImg = document.getElementById('contactWechatImg');
-        if (wechatImg) {
-            wechatImg.addEventListener('click', () => {
-                const modal = document.createElement('div'); modal.className = 'modal-overlay';
-                const box = document.createElement('div'); box.className = 'modal-container'; box.style.textAlign = 'center';
-                box.innerHTML = `<h3>微信咨询二维码</h3><img src="wechat_qr.png" style="width:200px;height:200px;margin:1rem auto;border-radius:20px;" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2214%22%3E%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%9C%AA%E6%89%BE%E5%88%B0%3C%2Ftext%3E%3C%2Fsvg%3E';"><br><button class="close-modal" style="margin-top:1rem;">关闭</button>`;
-                const closeBtn = box.querySelector('.close-modal');
-                closeBtn.onclick = () => modal.remove();
-                modal.appendChild(box);
-                document.body.appendChild(modal);
-                modal.addEventListener('click', (e) => { if(e.target === modal) modal.remove(); });
-            });
-        }
     }
     init();
 </script>
