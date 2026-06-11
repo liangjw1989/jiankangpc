@@ -6,7 +6,6 @@
     <title>男性健康自测表 | 美和生殖--男性医学中心</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ==================== 全局样式 ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +21,6 @@
             max-width: 960px;
             margin: 0 auto;
         }
-        /* 品牌区域 */
         .brand {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -46,7 +44,6 @@
             color: #1f6e43;
             font-weight: 600;
         }
-        /* 微信环境提示 */
         .mobile-warning {
             background-color: #fff3e0;
             border-left: 5px solid #e67e22;
@@ -59,7 +56,6 @@
             align-items: center;
             gap: 8px;
         }
-        /* 主卡片 */
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(2px);
@@ -69,7 +65,6 @@
             margin-bottom: 1.8rem;
             border: 1px solid rgba(255,255,255,0.7);
         }
-        /* 题目样式 */
         .question-item {
             margin-bottom: 2rem;
             padding-bottom: 0.8rem;
@@ -124,7 +119,6 @@
             cursor: pointer;
             pointer-events: auto;
         }
-        /* 按钮 */
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -161,7 +155,6 @@
         .btn-secondary:hover {
             background: #e2eaf3;
         }
-        /* 分数展示 */
         .score-area {
             background: linear-gradient(115deg, #f1f8fe, #ffffff);
             border-radius: 1.5rem;
@@ -175,7 +168,6 @@
             font-weight: 800;
             color: #1f6e43;
         }
-        /* 解读卡片 */
         .insight-card {
             background: #ffffffea;
             border-radius: 1.5rem;
@@ -200,7 +192,6 @@
             font-size: 0.88rem;
             line-height: 1.48;
         }
-        /* 二维码卡片布局（支持双码） */
         .qr-card-group {
             display: flex;
             flex-wrap: wrap;
@@ -241,7 +232,6 @@
             color: #1f6e43;
             font-size: 0.9rem;
         }
-        /* 工具二维码单独卡片 */
         .tool-qrcard {
             display: flex;
             align-items: center;
@@ -265,7 +255,6 @@
             display: block;
             border-radius: 12px;
         }
-        /* 底部 */
         .footer-disclaimer {
             text-align: center;
             margin-top: 1rem;
@@ -281,7 +270,6 @@
             font-size: 0.85rem;
             color: #a15c2c;
         }
-        /* 后台模态框 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -388,18 +376,13 @@
 </head>
 <body>
 <div class="container">
-    <!-- 头部品牌 -->
     <div class="brand">
         <h1>⚕️ 男性健康自测表</h1>
         <div class="brand-tag">美和生殖--男性医学中心</div>
     </div>
-
-    <!-- 微信环境提示 -->
     <div id="wechatWarning" class="mobile-warning" style="display: none;">
         ⚠️ 检测到您正在微信内浏览。为正常查看后台数据及导出文件，请点击右上角「…」→「在浏览器中打开」。
     </div>
-
-    <!-- 自测主卡片 -->
     <div class="card">
         <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
             <h3 style="font-weight: 600;">📋 6项核心自测</h3>
@@ -417,34 +400,28 @@
         </div>
         <div id="insightContainer"></div>
     </div>
-
-    <!-- 双微信咨询二维码卡片组 -->
     <div class="qr-card-group">
-        <!-- 微信码 1 -->
         <div class="qrcard">
             <div class="qrcard-left">
                 <img id="wechatImg1" src="wechat_qr1.png" alt="微信二维码1" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2290%22%20height%3D%2290%22%20viewBox%3D%220%200%2090%2090%22%3E%3Crect%20width%3D%2290%22%20height%3D%2290%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2210%22%3E%E5%BE%AE%E4%BF%A1%E7%A0%811%3C%2Ftext%3E%3C%2Fsvg%3E';">
             </div>
             <div class="qrcard-right">
                 <strong>📞 详询 0319-3021530</strong><br>
-                添加微信，获取一对一专业指导。<br>
-                <span style="font-size:0.7rem;">（生殖院区）</span>
+                添加微信1，获取一对一专业指导。<br>
+                <span style="font-size:0.7rem;">（请将图片替换为真实二维码）</span>
             </div>
         </div>
-        <!-- 微信码 2 -->
         <div class="qrcard">
             <div class="qrcard-left">
                 <img id="wechatImg2" src="wechat_qr2.png" alt="微信二维码2" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2290%22%20height%3D%2290%22%20viewBox%3D%220%200%2090%2090%22%3E%3Crect%20width%3D%2290%22%20height%3D%2290%22%20fill%3D%22%23f0f0f0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23999%22%20font-size%3D%2210%22%3E%E5%BE%AE%E4%BF%A1%E7%A0%812%3C%2Ftext%3E%3C%2Fsvg%3E';">
             </div>
             <div class="qrcard-right">
                 <strong>💬 微信深度咨询</strong><br>
-                添加微信，获取一对一专业指导。<br>
-                <span style="font-size:0.7rem;">（美和院区）</span>
+                添加微信2，获取健康建议与就诊帮助。<br>
+                <span style="font-size:0.7rem;">（请将图片替换为真实二维码）</span>
             </div>
         </div>
     </div>
-
-    <!-- 工具二维码（本页面分享码） -->
     <div class="tool-qrcard">
         <div class="tool-qrcard-left" id="qrcodeBox"></div>
         <div class="qrcard-right">
@@ -452,8 +429,6 @@
             扫描二维码打开本工具，可转发给朋友。
         </div>
     </div>
-
-    <!-- 底部说明 -->
     <div class="footer-disclaimer">
         ⚠️ 健康测评不作为诊疗依据。
     </div>
@@ -463,7 +438,73 @@
 </div>
 
 <script>
-    /* ==================== 医学自测核心逻辑 ==================== */
+    // ==================== 纯JS SHA-256 实现（无依赖）====================
+    (function(){
+        function sha256(string) {
+            function rightRotate(value, amount) {
+                return (value >>> amount) | (value << (32 - amount));
+            }
+            var words = [];
+            var message = unescape(encodeURIComponent(string));
+            var messageLength = message.length;
+            for (var i = 0; i < messageLength; ++i) {
+                words[i >> 2] |= (message.charCodeAt(i) & 0xff) << (24 - (i % 4) * 8);
+            }
+            words[messageLength >> 2] |= 0x80 << (24 - (messageLength % 4) * 8);
+            words[(((messageLength + 8) >> 6) << 4) + 15] = messageLength * 8;
+            var hash = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+            var k = [0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+                     0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+                     0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+                     0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+                     0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+                     0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+                     0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+                     0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
+            for (var i = 0; i < words.length; i += 16) {
+                var w = words.slice(i, i + 16);
+                for (var j = 16; j < 64; ++j) {
+                    var s0 = rightRotate(w[j - 15], 7) ^ rightRotate(w[j - 15], 18) ^ (w[j - 15] >>> 3);
+                    var s1 = rightRotate(w[j - 2], 17) ^ rightRotate(w[j - 2], 19) ^ (w[j - 2] >>> 10);
+                    w[j] = (w[j - 16] + s0 + w[j - 7] + s1) >>> 0;
+                }
+                var a = hash[0], b = hash[1], c = hash[2], d = hash[3],
+                    e = hash[4], f = hash[5], g = hash[6], h = hash[7];
+                for (var j = 0; j < 64; ++j) {
+                    var S1 = rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25);
+                    var ch = (e & f) ^ ((~e) & g);
+                    var temp1 = (h + S1 + ch + k[j] + w[j]) >>> 0;
+                    var S0 = rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22);
+                    var maj = (a & b) ^ (a & c) ^ (b & c);
+                    var temp2 = (S0 + maj) >>> 0;
+                    h = g; g = f; f = e; e = (d + temp1) >>> 0;
+                    d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+                }
+                hash[0] = (hash[0] + a) >>> 0;
+                hash[1] = (hash[1] + b) >>> 0;
+                hash[2] = (hash[2] + c) >>> 0;
+                hash[3] = (hash[3] + d) >>> 0;
+                hash[4] = (hash[4] + e) >>> 0;
+                hash[5] = (hash[5] + f) >>> 0;
+                hash[6] = (hash[6] + g) >>> 0;
+                hash[7] = (hash[7] + h) >>> 0;
+            }
+            var result = '';
+            for (var i = 0; i < 8; ++i) {
+                result += ('00000000' + hash[i].toString(16)).slice(-8);
+            }
+            return result;
+        }
+        window.sha256 = sha256;
+    })();
+
+    // ==================== 管理员密码哈希（初始密码 A123888）====================
+    // 可通过 console.log(sha256('您的新密码')) 生成新哈希值，然后替换下面这行
+    const ADMIN_PASSWORD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"; // sha256('A123888')
+
+    // ==================== 业务逻辑（无反调试）====================
+    const STORAGE_KEY = "male_health_test_history";
+
     // 题目数据
     const questions = [
         { text: "性欲（想做的欲望）", opts: ["完全没兴趣","很少有想法","偶尔有","正常","和以前差不多/很强"] },
@@ -474,7 +515,6 @@
         { text: "双方满意度（你自己的感受）", opts: ["非常不满意，痛苦","不满意","一般","比较满意","很满意"] }
     ];
 
-    // 构建题目表单
     function buildForm() {
         const form = document.getElementById('selfTestForm');
         if (!form) return;
@@ -511,7 +551,6 @@
         }
     }
 
-    // 获取分数
     function getScores() {
         let scores = [];
         for (let i = 1; i <= 6; i++) {
@@ -522,7 +561,6 @@
         return scores;
     }
 
-    // 解读内容（含等级、核心判断、建议）
     const insights = {
         low: {
             resultBase: "0～6分：性欲、勃起硬度、维持时间、射精控制、自信心、满意度六项均偏弱，整体功能处于偏低水平，",
@@ -568,31 +606,29 @@
         document.getElementById("scoreDisplay").style.display = "block";
     }
 
-    /* ==================== 数据存储与后台管理 ==================== */
-    const STORAGE_KEY = "male_health_test_history";
     function saveTestRecord(scores, total) {
         try {
             let records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-            records.unshift({ timestamp: new Date().toLocaleString(), scores, total });
+            records.unshift({ timestamp: new Date().toLocaleString(), scores: [...scores], total });
             if (records.length > 200) records = records.slice(0, 200);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
         } catch(e) { console.warn(e); }
     }
+
     function getHistory() {
         return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     }
+
     function clearHistory() {
         localStorage.removeItem(STORAGE_KEY);
     }
 
-    // 等级辅助
     function getGradeInfo(total) {
         if (total <= 6) return { text: "重度异常", class: "level-severe" };
         if (total <= 14) return { text: "轻度异常", class: "level-mild" };
         return { text: "正常", class: "level-normal" };
     }
 
-    // 导出 XLS (HTML格式)
     function exportToXLS() {
         const history = getHistory();
         if (!history.length) { alert("暂无历史数据可导出。"); return; }
@@ -602,7 +638,7 @@
         <thead><tr><th>序号</th><th>测试时间</th><th>Q1性欲</th><th>Q2勃起硬度</th><th>Q3维持时间</th><th>Q4射精控制</th><th>Q5自信焦虑</th><th>Q6满意度</th><th>总分</th><th>等级</th></tr></thead><tbody>`;
         history.forEach((rec, idx) => {
             const grade = getGradeInfo(rec.total);
-            html += `<tr><td>${idx+1}</td><td>${rec.timestamp}</td>${rec.scores.map(s => `<td>${s}</td>`).join('')}<td><strong>${rec.total}</strong></td><td>${grade.text}</td></tr>`;
+            html += `<tr><td>${idx+1}</td><td>${rec.timestamp}</td>${rec.scores.map(s=>`<td>${s}</td>`).join('')}<td><strong>${rec.total}</strong></td><td>${grade.text}</td></tr>`;
         });
         html += `</tbody></table><p>导出时间：${new Date().toLocaleString()}</p></body></html>`;
         const blob = new Blob([html], { type: "application/vnd.ms-excel" });
@@ -617,7 +653,6 @@
         alert("导出成功！");
     }
 
-    // 后台模态框（优化表格+统计）
     function showAdminData() {
         const history = getHistory();
         const modal = document.createElement('div'); modal.className = 'modal-overlay';
@@ -637,7 +672,7 @@
             <div class="modal-body">
                 ${history.length === 0 ? '<p class="text-muted" style="text-align:center;">暂无历史数据。每次计算总分后会自动保存记录。</p>' : `
                 <table class="admin-table">
-                    <thead><tr><th>序号</th><th>测试时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th><th>等级</th></tr></thead>
+                    <thead><tr><th>序号</th><th>时间</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>总分</th><th>等级</th></tr></thead>
                     <tbody>
                         ${history.map((rec, idx) => {
                             const grade = getGradeInfo(rec.total);
@@ -679,8 +714,6 @@
         modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
     }
 
-    /* ==================== 交互事件 ==================== */
-    // 重置按钮连续点击3次触发管理员后台
     let resetClicks = [];
     function normalReset() {
         for (let i=1;i<=6;i++) document.querySelectorAll(`input[name="q_${i}"]`).forEach(r=>r.checked=false);
@@ -694,8 +727,11 @@
         if (resetClicks.length >= 3) {
             resetClicks = [];
             const pwd = prompt("🔐 管理员验证\n请输入密码查看后台数据：");
-            if (pwd === "A123888") showAdminData();
-            else if (pwd !== null) alert("密码错误，无权限查看后台数据。");
+            if (pwd && sha256(pwd) === ADMIN_PASSWORD_HASH) {
+                showAdminData();
+            } else if (pwd !== null) {
+                alert("密码错误，无权限查看后台数据。");
+            }
             return;
         }
         normalReset();
@@ -709,7 +745,6 @@
         document.getElementById("scoreDisplay").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    /* ==================== 二维码生成 ==================== */
     function generateQRCode() {
         const container = document.getElementById("qrcodeBox");
         if (!container) return;
@@ -733,7 +768,6 @@
         } catch(e) { container.innerHTML = '<div>二维码生成失败</div>'; }
     }
 
-    // 微信环境提示
     function checkWechat() {
         if (/MicroMessenger/i.test(navigator.userAgent)) {
             const warnDiv = document.getElementById('wechatWarning');
@@ -741,7 +775,6 @@
         }
     }
 
-    // 二维码点击放大功能
     function enlargeImage(imgElement, title = "微信咨询二维码") {
         if (!imgElement) return;
         imgElement.addEventListener('click', () => {
@@ -756,7 +789,6 @@
         });
     }
 
-    /* ==================== 初始化入口 ==================== */
     function init() {
         buildForm();
         document.getElementById("calcBtn").addEventListener("click", onCalcClick);
@@ -764,12 +796,10 @@
         normalReset();
         generateQRCode();
         checkWechat();
-        // 为两个微信二维码添加放大功能
         const img1 = document.getElementById('wechatImg1');
         const img2 = document.getElementById('wechatImg2');
         if (img1) enlargeImage(img1, "微信咨询1");
         if (img2) enlargeImage(img2, "微信咨询2");
-        // 点击label优化
         document.addEventListener('click', (e) => {
             const opt = e.target.closest('.radio-option');
             if (opt) {
