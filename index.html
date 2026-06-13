@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>男性健康自测表 | 美和生殖--男性医学中心</title>
+    <title>男性健康评测系统 | 美和生殖--男性医学中心</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -407,7 +407,7 @@
             </div>
             <div class="qrcard-right">
                 <strong>📞 详询 0319-3021530</strong><br>
-                添加微信1，获取一对一专业指导。<br>
+                添加微信，获取健康建议与就诊帮助。<br>
                 <span style="font-size:0.7rem;">（生殖院区）</span>
             </div>
         </div>
@@ -417,7 +417,7 @@
             </div>
             <div class="qrcard-right">
                 <strong>💬 微信深度咨询</strong><br>
-                添加微信2，获取一对一专业指导。<br>
+                添加微信，获取健康建议与就诊帮助。<br>
                 <span style="font-size:0.7rem;">（美和院区）</span>
             </div>
         </div>
@@ -438,7 +438,7 @@
 </div>
 
 <script>
-    // ==================== 纯JS SHA-256 实现（无依赖）====================
+    // ==================== 纯 JS SHA-256 实现 ====================
     (function(){
         function sha256(string) {
             function rightRotate(value, amount) {
@@ -498,14 +498,15 @@
         window.sha256 = sha256;
     })();
 
-    // ==================== 管理员密码哈希（初始密码 A123888）====================
-    // 可通过 console.log(sha256('您的新密码')) 生成新哈希值，然后替换下面这行
-    const ADMIN_PASSWORD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"; // sha256('A123888')
+    // ==================== 管理员密码哈希 ====================
+    // 当前密码为 A123888，其 SHA256 哈希值如下：
+    const ADMIN_PASSWORD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+    
+    // 如需更换密码，请在浏览器控制台执行：console.log(sha256('您的新密码'))，然后替换上面引号内的值即可。
 
-    // ==================== 业务逻辑（无反调试）====================
+    // ==================== 业务逻辑 ====================
     const STORAGE_KEY = "male_health_test_history";
 
-    // 题目数据
     const questions = [
         { text: "性欲（想做的欲望）", opts: ["完全没兴趣","很少有想法","偶尔有","正常","和以前差不多/很强"] },
         { text: "勃起硬度（关键）", opts: ["完全无法勃起","能勃起但太软，无法进入","能勃起但硬度不足，勉强进入","硬度足够，但偶尔不持久","硬度足够、稳定，满意"] },
@@ -635,10 +636,16 @@
         let html = `<html><head><meta charset="UTF-8"><title>男性健康自测记录</title></head><body>
         <h2>男性健康自测记录</h2>
         <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
-        <thead><tr><th>序号</th><th>测试时间</th><th>Q1性欲</th><th>Q2勃起硬度</th><th>Q3维持时间</th><th>Q4射精控制</th><th>Q5自信焦虑</th><th>Q6满意度</th><th>总分</th><th>等级</th></tr></thead><tbody>`;
+        <thead><tr><th>序号</th><th>测试时间</th><th>Q1性欲</th><th>Q2勃起硬度</th><th>Q3维持时间</th><th>Q4射精控制</th><th>Q5自信焦虑</th><th>Q6满意度</th><th>总分</th><th>等级</th></td></thead><tbody>`;
         history.forEach((rec, idx) => {
             const grade = getGradeInfo(rec.total);
-            html += `<tr><td>${idx+1}</td><td>${rec.timestamp}</td>${rec.scores.map(s=>`<td>${s}</td>`).join('')}<td><strong>${rec.total}</strong></td><td>${grade.text}</td></tr>`;
+            html += `<tr>
+                <td>${idx+1}</td>
+                <td>${rec.timestamp}</td>
+                ${rec.scores.map(s => `<td>${s}</td>`).join('')}
+                <td><strong>${rec.total}</strong></td>
+                <td>${grade.text}</td>
+            </tr>`;
         });
         html += `</tbody></table><p>导出时间：${new Date().toLocaleString()}</p></body></html>`;
         const blob = new Blob([html], { type: "application/vnd.ms-excel" });
